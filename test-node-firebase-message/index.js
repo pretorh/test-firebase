@@ -1,4 +1,5 @@
 const admin = require("firebase-admin");
+const google = require('googleapis');
 const fs = require('fs');
 
 function getKey() {
@@ -12,6 +13,24 @@ function getKey() {
   };
 }
 
+function getAccessToken(scopes) {
+  return new Promise((resolve, reject) => {
+    var jwtClient = new google.auth.JWT(serviceAccount.client_email, null, serviceAccount.private_key, scopes, null);
+
+    console.log('authorize...');
+    jwtClient.authorize((err, tokens) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(tokens.access_token);
+    });
+  });
+}
+
+function onAuthorized(token) {
+  console.log('token: ' + token);
+}
+
 const KEY = getKey();
 const serviceAccount = require(KEY.file);
 console.log('initialize firebase app');
@@ -19,3 +38,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: KEY.url
 });
+
+getAccessToken(['https://www.googleapis.com/auth/firebase.messaging'])
+  .then(onAuthorized)
+  .catch(console.error);
