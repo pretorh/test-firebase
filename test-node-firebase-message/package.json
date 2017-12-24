@@ -1,0 +1,11 @@
+{
+  "name": "test-node-firebase-message",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "Hendri Pretorius",
+  "license": "ISC"
+}

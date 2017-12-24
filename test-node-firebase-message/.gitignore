@@ -1,0 +1,4 @@
+*-firebase-adminsdk-*.json
+*.swp
+node_modules/
+yarn.lock
