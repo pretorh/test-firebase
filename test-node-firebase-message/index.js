@@ -17,7 +17,7 @@ function getKey() {
 
 function getAccessToken(scopes) {
   return new Promise((resolve, reject) => {
-    var jwtClient = new google.auth.JWT(serviceAccount.client_email, null, serviceAccount.private_key, scopes, null);
+    var jwtClient = new google.Auth.JWT(serviceAccount.client_email, null, serviceAccount.private_key, scopes, null);
 
     console.log('authorize...');
     jwtClient.authorize((err, tokens) => {
