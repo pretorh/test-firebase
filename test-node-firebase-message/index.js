@@ -58,7 +58,7 @@ function onAuthorized(accessToken) {
     .then(res => res.json());
 }
 
-const DEVICE_TOKEN = process.argv[2]
+const DEVICE_TOKEN = process.argv[2] || process.env.DEVICE_TOKEN;
 if (!DEVICE_TOKEN) {
   throw new Error('no device token specified (set env var DEVICE_TOKEN)')
 }
